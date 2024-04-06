@@ -1,0 +1,120 @@
+/******************************************
+*******************************************
+
+    Angular & .Net
+
+*******************************************
+*******************************************/
+
+/*******************************
+            .Net  
+*******************************/
+
+- Folder Entities:
+
+    • Each class inside of it represents a table in our database
+
+- Data Entities:
+
+    • Any of our data access logic is going to go inside this folder
+    jam1e croft
+
+- Entity Framework:
+
+    • An Object Relational Mapper (ORM)
+    • Translates our code into SQL commands
+    • We need to create a DbContext class to act like a bridge between our domain or entity classes and the database
+    • Sqlite is only for development
+    • We can use as a change tracking
+    • Migrations is to automatically generate our database in our database server
+    • To install:
+        1. > Nuget: Open NuGet gallery
+        2. Find for entityframeworkcore
+        3. Install Microsoft.EntityFrameworkCore.Design (* Choose the same version of your .Net )
+        4. Install Microsoft.EntityFrameworkCore.Sqlite (* Choose the same version of your .Net )
+    • If we declare a column named Id of our entity, the entity framework will assume it as primary key 
+
+- Constructors:
+
+    • Are something that's run when a new class is created
+        
+- DataContext:
+
+    • When our new instance of DataContext is created, then this constructor is going to be called and look for the options that we provide
+    • Example: public DbSet<AppUser> Users { get; set; } // "Users" represents the name of the table when our database is created
+    • We need to add our data context as a service in Program.cs:
+        ~ A service is for when we want to get something from our database, then we're going to need access to our DbContext class
+    • To use migrations we need to stop the server run and download (https://www.nuget.org/packages/dotnet-ef/)
+
+- Migration:
+
+    • To create our first migration we need to use on cmd:
+        ~ dotnet ef migrations add InitialCreate -o Data/Migrations
+
+- Controller:
+
+    • Is a class or module within a web application that handles incoming HTTP requests related to an API
+    • The primary purpose of an API controller is to process requests, execute business logic, and return appropriate responses
+    • We must declare the route to access this API controller:
+        [Route("api/[controller]")] ---> this can be accessed in --> /api/"name_of_your_class"
+
+    • When we do that [HttpGet("{id}")] is the same to add a new /{id}, such as:
+         /api/users/2
+
+- Assynchronous Method:
+
+    • It gives to the application scalability (best pratice)
+    • Remember the restaurant analogy:
+        ~ If we request to a waiter a tasty burger, he will take the order to the kitchen
+        ~ In the synchronous world the waiter would wait the kitchen for the tasty burger to be cooked by the chef
+
+- CORS (Cross Origin Resource Sharing):
+
+    • We need to add CORS service on "Program.cs" to allow Angular to comunicates with our api server:
+        ~ builder.Services.AddCors();
+        ~ app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+
+
+/*******************************
+            Angular  
+*******************************/
+
+- To use angular, your should see the compability with node.js. You can do that using this site:
+    https://angular.io/guide/versions
+
+- Check the node.js version to see what angular version you should install:
+    node -v
+
+- At the principal folder, to start angular (we currently using Angular 16):
+    npm install -g @angular/cli@16
+
+- To see the information of the project:
+    ng version
+
+- In app.module.ts:
+    
+    • We can import our libraries to use in components
+    • Before add one library, we need to inject it on components to use that
+
+- We also should install ngx-bootstrap & font-awesome:
+
+    ng add ngx-bootstrap
+    npm install font-awesome
+
+    • For ngx-bootstrap always check the version compability:
+        https://valor-software.com/ngx-bootstrap/#/documentation#compatibility
+
+    • For font-awesome you need to add the style for "angular.json":
+
+        ~ Search for style and then add:
+            "./node_modules/font-awesome/css/font-awesome.min.css"
+
+        ~ It will stay like this:
+            "styles": [
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/font-awesome/css/font-awesome.min.css",
+              "src/styles.css"
+            ]
+
+- To use SSL on our application, we need to install mkcert:
