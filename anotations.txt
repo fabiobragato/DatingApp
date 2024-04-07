@@ -17,7 +17,6 @@
 - Data Entities:
 
     • Any of our data access logic is going to go inside this folder
-    jam1e croft
 
 - Entity Framework:
 
@@ -37,6 +36,11 @@
 - Constructors:
 
     • Are something that's run when a new class is created
+
+- Trick:
+
+    • In "API.csproj" we can disable the inference of all string must be non nulable changing the scope to:
+        <Nullable>disable</Nullable>
         
 - DataContext:
 
@@ -74,6 +78,32 @@
         ~ builder.Services.AddCors();
         ~ app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
 
+- DTO (Data Transfer Object):
+
+    • Is an object that defines how the data will be transfered between networks
+    • We should use them due to not expose directly the database entities for the client
+    • Is here where we add our data validation
+
+- Json Web Tokens (JWT):
+
+    • Self-contained and can contain:
+        ~ Credentials
+        ~ Claims
+        ~ Other information
+
+    • Flow JWT:
+        file:///C:\Users\fcarmo\Desktop\DatingApp\flow_jwt.png
+
+    • Benefits:
+        ~ No session to manage
+        ~ Portable (can be used with multiple backends)
+        ~ No cookies required (mobile friendly)
+
+    • We need to install the lastest version of System.IdentityModel.Tokens.Jwt & Microsoft.AspNetCore.Authentication.JwtBearer to start using
+
+- Folder Extensions:
+
+    • We use that folder and class to create our builds for application and leave "Program.cs" more clean
 
 /*******************************
             Angular  
@@ -116,5 +146,3 @@
               "./node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css"
             ]
-
-- To use SSL on our application, we need to install mkcert:
